@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% block content %}
+    {% if listings %}
+    <h1>{{ listings.totalResults }} {{ keywords | title }} Jobs in {{ locationName | title }}</h1>
+    <br>
+        {% for listing in listings.results %}
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title"><a href="{{ listing.jobUrl }}">{{ listing.jobTitle }}</a></h3>
+                <p class="card-text"><i class="far fa-clock"></i> Posted {{ listing.date }} by {{ listing.employerName }}</p>
+                <div class="row">
+                    <div class="col">
+                        <p class="card-text">
+                            <strong>
+                            {% if listing.minimumSalary == None %}
+                                Competitive Salary
+                            {% else %}
+                                {% if listing.currency == 'GBP' %}<i class="fas fa-pound-sign"></i>
+                                {% elif listing.currency == 'EUR' %}<i class="fas fa-euro-sign"></i>
+                                {% elif listing.currency == 'USD' %}<i class="fas fa-dollar-sign"></i>
+                                {% endif %}{{ listing.minimumSalary | floatformat:0 | intcomma }} - {{ listing.maximumSalary | floatformat:0 | intcomma }} per annum
+                            {% endif %}
+                            </strong>
+                        </p>
+                    </div>
+                    <div class="col">
+                        <p class="card-text"><i class="fas fa-map-marker-alt"></i> <strong>{{ listing.locationName }}</strong></p>
+                    </div>
+                </div>
+                <br>
+              <p class="card-text">{{ listing.jobDescription }}</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+          <br>
+        {% endfor %}
+        {{ listings}}
+    {% endif %}
+{% endblock %}
