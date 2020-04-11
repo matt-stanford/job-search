@@ -23,3 +23,6 @@ def search(request):
 
 def listings(request):
     return render(request, 'jobs/listings.html', {})
+
+def shortlist(request):
+    return render(request, 'jobs/shortlist.html', {})
