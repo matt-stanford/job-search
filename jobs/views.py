@@ -1,5 +1,8 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
+
+@login_required
 def search(request):
     import requests
     import json
@@ -21,8 +24,10 @@ def search(request):
     else:
         return render(request, 'jobs/search.html', {})
 
+
 def listings(request):
     return render(request, 'jobs/listings.html', {})
+
 
 def shortlist(request):
     return render(request, 'jobs/shortlist.html', {})
