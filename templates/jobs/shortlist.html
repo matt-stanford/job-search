@@ -1,5 +1,31 @@
 {% extends 'base.html' %}
 
+{% load humanize %}
+
+{% block title %}Shortlisted Jobs{% endblock %}
 {% block content %}
-    <h1>Shortlist</h1>
+    {% if jobs %}
+        <h1>{{ jobs.count }} Shortlisted job{% if jobs.count > 1 %}s{% endif %}</h1>
+        <br>
+        {% for job in jobs %}
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <p class="card-text mb-1"><a href="{{ job.jobUrl }}"><strong>{{ job.jobTitle }}</strong></a></p>
+                            <p class="card-text mb-1">{{ job.locationName }} - {{ job.employerName }}</p>
+                            <p class="card-text">Saved: {{ job.saveDate | timesince }}</p>
+                        </div>
+                        <div class="col-sm-2 my-auto">
+                            <a href="{{ job.jobUrl }}" class="btn btn-primary btn-block">Apply</a>
+                        </div>
+                        <div class="col-sm-2 my-auto">
+                            <a href="{{ job.jobUrl }}" class="btn btn-outline-primary btn-block"><i class="far fa-trash-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+        {% endfor %}
+    {% endif %}
 {% endblock %}

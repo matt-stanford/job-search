@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from .models import Job
 
 
 @login_required
@@ -28,6 +29,7 @@ def search(request):
 def listings(request):
     return render(request, 'jobs/listings.html', {})
 
-
+@login_required
 def shortlist(request):
-    return render(request, 'jobs/shortlist.html', {})
+    jobs = Job.objects.filter(user=request.user).order_by('-saveDate')
+    return render(request, 'jobs/shortlist.html', {'jobs': jobs})
