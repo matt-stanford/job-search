@@ -2,6 +2,8 @@
 
 {% load humanize %}
 
+{% block title %}Jobs{% endblock %}
+
 {% block content %}
     {% if listings %}
     <h1>{{ listings.totalResults }} {{ keywords | title }} Jobs in {{ locationName | title }}</h1>
@@ -32,7 +34,7 @@
                 </div>
                 <br>
               <p class="card-text">{{ listing.jobDescription }}</p>
-              <a href="#" class="btn btn-primary"><i class="far fa-heart"></i> Shortlist</a>
+              <a href="{% url 'add_to_shortlist' listing.jobId %}" class="btn btn-primary"><i class="far fa-heart"></i> Shortlist</a>
             </div>
           </div>
           <br>

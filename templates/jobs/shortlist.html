@@ -20,7 +20,7 @@
                             <a href="{{ job.jobUrl }}" class="btn btn-primary btn-block">Apply</a>
                         </div>
                         <div class="col-sm-2 my-auto">
-                            <a href="{{ job.jobUrl }}" class="btn btn-outline-primary btn-block"><i class="far fa-trash-alt"></i></a>
+                            <a href="{% url 'delete' job.id %}" class="btn btn-outline-primary btn-block"><i class="far fa-trash-alt"></i></a>
                         </div>
                     </div>
                 </div>

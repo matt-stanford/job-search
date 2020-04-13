@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from .models import Job
 
 
@@ -33,3 +34,28 @@ def listings(request):
 def shortlist(request):
     jobs = Job.objects.filter(user=request.user).order_by('-saveDate')
     return render(request, 'jobs/shortlist.html', {'jobs': jobs})
+
+
+@login_required
+def delete(request, job_id):
+    job = Job.objects.get(pk=job_id)
+    job.delete()
+    return redirect('shortlist')
+
+
+@login_required
+def add_to_shortlist(request, job_id):
+    import requests
+    import json
+    api_key = '842b7b02-1d3f-48fd-8e73-1b599b0bce57'
+    api_request = requests.get(f'https://{api_key}:@www.reed.co.uk/api/1.0/jobs/{job_id}')
+    listing = json.loads(api_request.content)
+    job = Job()
+    job.user = request.user
+    job.jobTitle = listing['jobTitle']
+    job.locationName=listing['locationName']
+    job.employerName=listing['employerName']
+    job.jobUrl=listing['jobUrl']
+    job.save()
+    return redirect('listings')
+    # return render(request, 'pages/index.html', {'listing': listing})
