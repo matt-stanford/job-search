@@ -1,12 +1,9 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %}Welcome{% endblock %}
 
 {% block content %}
-    <h1>hi there</h1>
-
-    {% if listing %}
-        {{ listing }}
-
-    {% endif %}
+    <img src="{% static 'img/banner.png' %}" alt="" width="100%" height="auto">
 {% endblock %}
