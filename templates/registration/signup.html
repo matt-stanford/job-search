@@ -1,32 +1,26 @@
 {% extends 'base.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block title %}Sign up{% endblock %}
 
 {% block content %}
-<h1>Sign up</h1>
-<form method="post">
-    {% csrf_token %}
-
-    {% load widget_tweaks %}
-
-    {% if form.non_field_errors %}
-        <div class="alert alert-danger">
-            {{ form.non_field_errors }}
+<div class="col-md-6 offset-md-3">
+    <form method="post">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4 pb-3">Register</legend>
+            {{ form|crispy }}
+        </fieldset>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Register</button>
         </div>
-    {% endif %}
+    </form>
+    <div class="border-top pt-3">
+        <small class="muted-text">Already have an account? <a href="#">Sign in</a></small>
+    </div>
+</div>
 
-    {% for field in form %}
-        <div class="form-group {%if field.errors %}alert alert-danger{% endif %}">
-            {{ field.errors }}
-            {{ field.label_tag }}
-            {% render_field field class="form-control" %}
-            {% if field.help_text %}
-                <small class="text-muted">{{ field.help_text | safe }}</small>
-            {% endif %}
-        </div>
-    {% endfor %}
 
-    <button type="submit" class="btn btn-primary">Sign up</button>
-</form>
 
 {% endblock %}
