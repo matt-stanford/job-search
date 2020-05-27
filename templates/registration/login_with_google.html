@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+    
+{% load socialaccount %}
+{% providers_media_js %}
+
+{% block title %}Log in{% endblock %}
+
+{% block content %}
+
+    <div class="col-md-6 offset-md-3">
+        <a href="{% provider_login_url 'google' %}">Google Connect</a>
+    </div>
+
+{% endblock %}

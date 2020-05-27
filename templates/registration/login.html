@@ -1,34 +1,46 @@
 {% extends 'base.html' %}
+    
+{% load socialaccount %}
+{% providers_media_js %}
+{% load crispy_forms_tags %}
 
 {% block title %}Log in{% endblock %}
 
 {% block content %}
-<div class="col-md-6 offset-md-3">
-    <h1>Log in</h1>
-    <form method="post">
-        {% csrf_token %}
-    
-        {% load widget_tweaks %}
-    
-        {% if form.non_field_errors %}
-            <div class="alert alert-danger">
-                {{ form.non_field_errors }}
+<div class="col-md-8 offset-md-2">
+    <h1>Sign in</h1>
+    <div class="mt-4">
+        <h4 class="text-center mt-3 mb-4">Sign in to your jobsearch.co.uk jobseekers account</h4>
+        <div class="container">
+            <div class="text-center">
+                <div class="col-md-6 offset-md-3">
+                    <a class="btn btn-danger btn-block btn-lg" href="{% provider_login_url 'google' %}"><i class="fab fa-google"></i>&nbsp;&nbsp;&nbsp;&nbsp;Sign in using Google</a>
+                </div>
+                <div class="privacy-notice">
+                    <p><i class="fas fa-lock"></i> We will not post to, or share your social profiles.</p>
+                </div>
+                <div class="separator">
+                    OR
+                </div>
             </div>
-        {% endif %}
-    
-        {% for field in form %}
-            <div class="form-group {%if field.errors %}alert alert-danger{% endif %}">
-                {{ field.errors }}
-                {{ field.label_tag }}
-                {% render_field field class="form-control" %}
-                {% if field.help_text %}
-                    <small class="text-muted">{{ field.help_text | safe }}</small>
-                {% endif %}
+            <div class="col-md-8 offset-md-2">
+                <form method="post">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        {{ form|crispy }}
+                    </fieldset>
+                    <div class="form-group">
+                        <div class="col-md-6 offset-md-3">
+                            <button type="submit" class="btn btn-primary btn-block">Login</button>
+                        </div>
+                        <p class="text-center mt-2"><a href="#"><strong>Forgot your password?</strong></a></p>
+                    </div>
+                </form>
             </div>
-        {% endfor %}
+            
+        </div>
+    </div>
     
-        <button type="submit" class="btn btn-primary">Log in</button>
-    </form>
 </div>
 
 {% endblock %}

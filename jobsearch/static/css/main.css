@@ -1,0 +1,27 @@
+.privacy-notice {
+    padding-top: 25px;
+    padding-bottom: 15px;
+}
+
+.separator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.separator::before {
+    margin-right: 10px;
+}
+
+.separator::after {
+    margin-left: 10px;
+}
+
+.separator::after, .separator::before {
+    content: "";
+    display: block;
+    background: #d6d6d6;
+    width: 50%;
+    height: 1px;
+    margin: 15px 0;
+}
