@@ -1,4 +1,4 @@
-<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary">
     <div class="container">
         <a class="navbar-brand" href="{% url 'index' %}"><strong>jobsearch</strong>.co.uk</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,11 +20,11 @@
                 <a class="nav-link" href="{% url 'shortlist' %}"><i class="far fa-heart"></i> Shortlisted jobs</a>
               </li>
             {% else %}
-              <li class="nav-item active">
-                <a class="btn btn-outline-primary rounded-pill" href="{% url 'register' %}">Sign up</a>
+              <li class="nav-item">
+                <a class="btn btn-register rounded-pill" href="{% url 'register' %}">Register</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'login' %}">Log in</a>
+                <a class="nav-link" href="{% url 'login' %}">Sign in</a>
               </li>
             {% endif %}
           </ul>

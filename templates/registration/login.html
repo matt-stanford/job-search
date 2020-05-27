@@ -7,40 +7,48 @@
 {% block title %}Log in{% endblock %}
 
 {% block content %}
-<div class="col-md-8 offset-md-2">
-    <h1>Sign in</h1>
-    <div class="mt-4">
-        <h4 class="text-center mt-3 mb-4">Sign in to your jobsearch.co.uk jobseekers account</h4>
-        <div class="container">
-            <div class="text-center">
-                <div class="col-md-6 offset-md-3">
-                    <a class="btn btn-danger btn-block btn-lg" href="{% provider_login_url 'google' %}"><i class="fab fa-google"></i>&nbsp;&nbsp;&nbsp;&nbsp;Sign in using Google</a>
-                </div>
-                <div class="privacy-notice">
-                    <p><i class="fas fa-lock"></i> We will not post to, or share your social profiles.</p>
-                </div>
-                <div class="separator">
-                    OR
-                </div>
-            </div>
-            <div class="col-md-8 offset-md-2">
-                <form method="post">
-                    {% csrf_token %}
-                    <fieldset class="form-group">
-                        {{ form|crispy }}
-                    </fieldset>
-                    <div class="form-group">
-                        <div class="col-md-6 offset-md-3">
-                            <button type="submit" class="btn btn-primary btn-block">Login</button>
+<div class="medium-container">
+    <div class="signin-section">
+        <h1>Sign in</h1>
+        <div class="mt-4">
+            <h4 class="text-center mt-3 mb-4">Sign in to your jobsearch.co.uk jobseekers account</h4>                
+                <div class="text-center">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6">
+                            <a class="btn btn-facebook btn-block btn-lg" href="{% provider_login_url 'facebook' %}"><i class="fab fa-facebook-f"></i>&nbsp;&nbsp;&nbsp;&nbsp;Sign in using Facebook</a>
                         </div>
-                        <p class="text-center mt-2"><a href="#"><strong>Forgot your password?</strong></a></p>
+                        <div class="col-xs-12 col-sm-6">
+                            <a class="btn btn-google btn-block btn-lg" href="{% provider_login_url 'google' %}"><i class="fab fa-google"></i>&nbsp;&nbsp;&nbsp;&nbsp;Sign in using Google</a>
+                        </div>
                     </div>
-                </form>
-            </div>
-            
+                    <div class="privacy-notice">
+                        <p><i class="fas fa-lock"></i> We will not post to, or share your social profiles.</p>
+                    </div>
+                    <div class="separator">
+                        OR
+                    </div>
+                </div>
+                <div class="col-md-8 offset-md-2">
+                    <form method="post">
+                        {% csrf_token %}
+                        <fieldset class="form-group">
+                            {{ form|crispy }}
+                        </fieldset>
+                        <div class="form-group">
+                            <div class="col-md-8 offset-md-2">
+                                <button type="submit" class="btn btn-primary btn-block">Login</button>
+                            </div>
+                            <div class="text-center">
+                                <p class="my-3"><a href="#"><strong>Forgot your password?</strong></a></p>
+                                <p class="mb-2">Don't have an account? <a href="{% url 'register' %}"><strong>Register</strong></a></p>
+                            </div>
+                            
+                        </div>
+                    </form>
+                </div>
         </div>
     </div>
-    
 </div>
+
 
 {% endblock %}
