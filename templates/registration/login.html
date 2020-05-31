@@ -4,7 +4,7 @@
 {% providers_media_js %}
 {% load crispy_forms_tags %}
 
-{% block title %}Log in{% endblock %}
+{% block title %}Sign in{% endblock %}
 
 {% block content %}
 <div class="medium-container">
@@ -36,11 +36,11 @@
                         </fieldset>
                         <div class="form-group">
                             <div class="col-md-8 offset-md-2">
-                                <button type="submit" class="btn btn-primary btn-block">Login</button>
+                                <button type="submit" class="btn btn-primary btn-block">Sign in</button>
                             </div>
                             <div class="text-center">
                                 <p class="my-3"><a href="#"><strong>Forgot your password?</strong></a></p>
-                                <p class="mb-2">Don't have an account? <a href="{% url 'register' %}"><strong>Register</strong></a></p>
+                                <p class="mb-4">Don't have an account? <a href="{% url 'register' %}"><strong>Register</strong></a></p>
                             </div>
                             
                         </div>

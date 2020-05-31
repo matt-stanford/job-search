@@ -1,3 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+body {
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+h1 {
+    font-weight: 700 !important;
+}
+
+h4 {
+    font-size: 22px !important;
+    font-weight: 600 !important;
+}
+
 .privacy-notice {
     padding-top: 25px;
     padding-bottom: 15px;
@@ -32,6 +47,14 @@
 
 .signin-section {
     padding: 30px 90px 0px 90px;
+    border: 1px solid #d6d6d6;
+    border-radius: 3px;
+    box-shadow: 0 10px 5px -5px rgba(0,0,0,.15);
+}
+
+.btn {
+    font-size: 1rem !important;
+    font-weight: 700 !important;
 }
 
 .btn-register {
@@ -40,6 +63,7 @@
     padding: 0px 12px !important;
     line-height: 36px !important;
     width: 124px;
+    /* margin-top: 11px; */
 }
 
 .btn-register:hover {
@@ -66,15 +90,9 @@
     background-color: #e15f4f !important;
 }
 
-.navbar-dark .navbar-nav .nav-link {
-    color: white !important;
-}
-
-
 .nav-item {
     height: 60px;
     line-height: 60px;
-    padding: 0px 15px !important;
 }
 
 .nav-item:hover {
@@ -83,10 +101,31 @@
 }
 
 .nav-link {
-    padding: 0px !important;
+    padding: 0px 15px !important;
+    color: white !important;
+}
+
+.dropdown-menu {
+    padding: 0 !important;
+    border-radius: 0px !important;;
+}
+
+.dropdown-item:hover {
+    background-color: #eaeaea;
+}
+
+.dropdown-divider {
+    margin: 0 !important;
 }
 
 .navbar {
     padding: 0px !important;
     height: 60px;
 }
+
+.shortlisted {
+    background-color: white !important;
+    color: #007bff !important;
+}
+
+/*  :not(.btn-register, .dropdown-show) */

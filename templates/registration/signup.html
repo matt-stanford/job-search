@@ -1,26 +1,53 @@
 {% extends 'base.html' %}
-
+    
+{% load socialaccount %}
+{% providers_media_js %}
 {% load crispy_forms_tags %}
 
-{% block title %}Sign up{% endblock %}
+{% block title %}Register{% endblock %}
 
 {% block content %}
-<div class="col-md-6 offset-md-3">
-    <form method="post">
-        {% csrf_token %}
-        <fieldset class="form-group">
-            <legend class="border-bottom mb-4 pb-3">Register</legend>
-            {{ form|crispy }}
-        </fieldset>
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">Register</button>
+<div class="medium-container">
+    <div class="signin-section">
+        <h1>Register</h1>
+        <div class="mt-4">
+            <h4 class="text-center mt-3 mb-4">Register at jobsearch.co.uk</h4>                
+                <div class="text-center">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6">
+                            <a class="btn btn-facebook btn-block btn-lg" href="{% provider_login_url 'facebook' %}"><i class="fab fa-facebook-f"></i>&nbsp;&nbsp;&nbsp;&nbsp;Register using Facebook</a>
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            <a class="btn btn-google btn-block btn-lg" href="{% provider_login_url 'google' %}"><i class="fab fa-google"></i>&nbsp;&nbsp;&nbsp;&nbsp;Register using Google</a>
+                        </div>
+                    </div>
+                    <div class="privacy-notice">
+                        <p><i class="fas fa-lock"></i> We will not post to, or share your social profiles.</p>
+                    </div>
+                    <div class="separator">
+                        OR
+                    </div>
+                </div>
+                <div class="col-md-8 offset-md-2">
+                    <form method="post">
+                        {% csrf_token %}
+                        <fieldset class="form-group">
+                            {{ form|crispy }}
+                        </fieldset>
+                        <div class="form-group">
+                            <div class="col-md-8 offset-md-2">
+                                <button type="submit" class="btn btn-primary btn-block">Register</button>
+                            </div>
+                            <div class="text-center">
+                                <p class="mt-3 mb-4">Already have an account? <a href="{% url 'login' %}"><strong>Sign in</strong></a></p>
+                            </div>
+                            
+                        </div>
+                    </form>
+                </div>
         </div>
-    </form>
-    <div class="border-top pt-3">
-        <small class="muted-text">Already have an account? <a href="#">Sign in</a></small>
     </div>
 </div>
-
 
 
 {% endblock %}

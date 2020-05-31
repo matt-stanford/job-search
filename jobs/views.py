@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.http import HttpResponse
 from .models import Job
 
 
@@ -44,6 +45,13 @@ def delete(request, job_id):
 
 
 @login_required
+def remove_from_shortlist(request, job_id):
+    job = Job.objects.get(pk=job_id)
+    job.delete()
+    return HttpResponse(status=204)
+
+
+@login_required
 def add_to_shortlist(request, job_id):
     import requests
     import json
@@ -57,5 +65,4 @@ def add_to_shortlist(request, job_id):
     job.employerName=listing['employerName']
     job.jobUrl=listing['jobUrl']
     job.save()
-    return redirect('listings')
-    # return render(request, 'pages/index.html', {'listing': listing})
+    return HttpResponse(status=204)
