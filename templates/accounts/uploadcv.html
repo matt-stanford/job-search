@@ -5,11 +5,44 @@
 {% block title %}Upload CV{% endblock %}
 
 {% block content %}
-<p class="card-text">Upload a new CV, or use our CV builder to build one for you.</p>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form }}
-        <br>
-        <button type="submit" class="btn btn-primary mb-4">Upload CV</button>
-    </form>
+<br>
+    <a href="{% url 'profile' %}"><i class="fas fa-angle-left"></i> Back</a>
+    <div class="card mt-3 blue-top">
+        <div class="card-body">
+            <div class="row pr-3">
+                {% if user.resume %}
+                    <div class="col-sm-8">
+                        <h1>Change your CV</h1>
+                        <p>Uploading a new file will replace your current CV.</p>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="row download-cv">
+                            <div class="col-md-2">
+                                <i class="far fa-file large-icon"></i>
+                            </div>
+                            <div class="col-md-6">
+                                <strong>{{ user.resume.filename }}</strong>
+                                <br>
+                                <span>{{ user.resume.date_uploaded|date:"d/m/Y" }}</span>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="#">Download</a>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <h1>Add your CV</h1>
+                {% endif %}
+            </div>
+            
+            <div class="upload-cv">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <br>
+                    <button type="submit" class="btn btn-primary mb-4">Upload CV</button>
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock %}

@@ -19,9 +19,12 @@
                 <div class="card">
                     <h5 class="card-header"><i class="far fa-file mr-2"></i>CV</h5>
                     <div class="card-body">
-                        {% if user.resume == Null %}
+                        {% if not user.resume %}
                             <div class="alert alert-danger" role="alert">
                                 <strong>You haven't uploaded a CV yet.</strong> To apply for jobs you'll need a CV.
+                            </div>
+                            <div class="data">
+                                <a href="{% url 'uploadcv' %}" class="btn btn-primary">Continue</a>
                             </div>
                         {% else %}
                             <div class="row">

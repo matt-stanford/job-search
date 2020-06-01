@@ -156,4 +156,20 @@ h5 {
 .cv-name {
     font-weight: 700;
 }
+
+.blue-top {
+    border-top-width: 5px !important;
+    border-top-color: #007bff !important;
+}
+
+.download-cv {
+    border-radius: 2px;
+    padding: 15px 0px;
+    border: 1px solid #cfddf3;
+    background-color: #f0f4fa;
+}
+
+.large-icon {
+    font-size: 50px;
+}
 /*  :not(.btn-register, .dropdown-show) */
