@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}Upload CV{% endblock %}
+
+{% block content %}
+<p class="card-text">Upload a new CV, or use our CV builder to build one for you.</p>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        <br>
+        <button type="submit" class="btn btn-primary mb-4">Upload CV</button>
+    </form>
+{% endblock %}

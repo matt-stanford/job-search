@@ -5,8 +5,20 @@ body {
 }
 
 h1 {
+    font-size: 24px !important;
     font-weight: 700 !important;
 }
+
+h2 {
+    font-size: 20px !important;
+    font-weight: 700 !important;
+}
+
+h3 {
+    font-size: 18px !important;
+    font-weight: 600 !important;
+}
+
 
 h4 {
     font-size: 22px !important;
@@ -139,5 +151,9 @@ h5 {
 
 .card-header {
     background-color: white !important;
+}
+
+.cv-name {
+    font-weight: 700;
 }
 /*  :not(.btn-register, .dropdown-show) */

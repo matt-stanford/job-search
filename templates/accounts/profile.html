@@ -1,7 +1,5 @@
 {% extends 'base.html' %}
 
-{% load crispy_forms_tags %}
-
 {% block title %}Profile{% endblock %}
 
 {% block content %}
@@ -9,9 +7,9 @@
         <div class="row">
             <div class="col-sm-4">
                 <div class="card">
-                    <h5 class="card-header"><i class="far fa-user mr-2"></i>About you</h5>
+                    <h2 class="card-header"><i class="far fa-user mr-2"></i>About you</h2>
                     <div class="card-body">
-                      <h5 class="card-title">Special title treatment</h5>
+                      <h2 class="card-title">Special title treatment</h2>
                       <p class="card-text"><i class="far fa-envelope"></i> {{ user.email }}</p>
                       <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
@@ -25,14 +23,57 @@
                             <div class="alert alert-danger" role="alert">
                                 <strong>You haven't uploaded a CV yet.</strong> To apply for jobs you'll need a CV.
                             </div>
+                        {% else %}
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="current-cv">
+                                        <h3>Current CV</h3>
+                                        <div class="data">
+                                            <span class="cv-name">
+                                                <i class="far fa-file"></i>
+                                                <span>{{ user.resume.filename }}</span>
+                                            </span>
+                                            <span>Added {{ user.resume.date_uploaded|date:"d/m/Y" }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-8">
+                                    <div class="manage-cv">
+                                        <h3>Manage your CV</h3>
+                                        <div class="data">
+                                            <p>Upload a new CV, or use our CV builder to build one for you.</p>
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-primary px-5" data-toggle="modal" data-target="#exampleModal">
+                                                Update CV
+                                            </button>
+                                            
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Updating your CV</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            We've noticed that you added a CV on {{ user.resume.date_uploaded|date:"d/m/Y" }}. Updating your CV will overwrite and replace your current saved CV - {{ user.resume.filename }} Do you want to continue?
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <a href="{% url 'uploadcv' %}" class="btn btn-primary">Continue</a>
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
                         {% endif %}
-                        <p class="card-text">Upload a new CV, or use our CV builder to build one for you.</p>
-                        <form method="post" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            {{ form }}
-                            <br>
-                            <button type="submit" class="btn btn-primary mb-4">Upload CV</button>
-                        </form>
+                        
                     </div>
                 </div>
             </div>

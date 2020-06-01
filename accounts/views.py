@@ -16,6 +16,11 @@ def register(request):
 
 
 @login_required
+def profile(request):
+    return render(request, 'accounts/profile.html', {})
+
+
+@login_required
 def resume_upload(request):
     if request.method == 'POST':
         form = ResumeForm(request.POST, request.FILES)
@@ -24,10 +29,10 @@ def resume_upload(request):
             form.instance.user = user
             form.save()
             messages.success(request, 'Your resume has been uploaded successfully')
-            return redirect('profile')
+            return redirect('uploadcv')
     else:
         form = ResumeForm()
-    return render(request, 'accounts/profile.html', {'form': form})
+    return render(request, 'accounts/uploadcv.html', {'form': form})
     
 
 
