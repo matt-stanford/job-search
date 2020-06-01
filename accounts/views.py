@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .forms import UserRegistrationForm
+from django.contrib.auth.decorators import login_required
+from .forms import UserRegistrationForm, ResumeForm
 
 def register(request):
     if request.method == 'POST':
@@ -12,6 +13,21 @@ def register(request):
     else:
         form = UserRegistrationForm()
     return render(request, 'registration/signup.html', {'form': form})
+
+
+@login_required
+def resume_upload(request):
+    if request.method == 'POST':
+        form = ResumeForm(request.POST, request.FILES)
+        if form.is_valid():
+            user = request.user
+            form.instance.user = user
+            form.save()
+            messages.success(request, 'Your resume has been uploaded successfully')
+            return redirect('profile')
+    else:
+        form = ResumeForm()
+    return render(request, 'accounts/profile.html', {'form': form})
     
 
 

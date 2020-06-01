@@ -13,6 +13,10 @@ h4 {
     font-weight: 600 !important;
 }
 
+h5 {
+    font-weight: 700 !important;
+}
+
 .privacy-notice {
     padding-top: 25px;
     padding-bottom: 15px;
@@ -38,6 +42,11 @@ h4 {
     background: #d6d6d6;
     width: 45%;
     height: 1px;
+}
+
+.large-container {
+    max-width: 960px;
+    margin: 0 auto;
 }
 
 .medium-container {
@@ -128,4 +137,7 @@ h4 {
     color: #007bff !important;
 }
 
+.card-header {
+    background-color: white !important;
+}
 /*  :not(.btn-register, .dropdown-show) */
