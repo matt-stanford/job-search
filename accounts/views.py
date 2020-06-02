@@ -12,7 +12,7 @@ def register(request):
             return redirect('search')
     else:
         form = UserRegistrationForm()
-    return render(request, 'registration/signup.html', {'form': form})
+    return render(request, 'accounts/signup.html', {'form': form})
 
 
 @login_required

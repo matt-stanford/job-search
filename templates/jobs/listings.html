@@ -36,7 +36,12 @@
                         </div>
                         <br>
                     <p class="card-text">{{ listing.jobDescription }}</p>
-                    <a href="" data-jobid="{{ listing.jobId }}" class="btn btn-primary job"><i class="far fa-heart"></i> Shortlist</a>
+                    <a href="{% url 'add_to_shortlist' listing.jobId %}" data-jobid="{{ listing.jobId }}" class="btn btn-primary job"><i class="far fa-heart"></i> Shortlist</a>
+                    {% for job in jobs %}
+                        {% if job.jobId == listing.jobId|stringformat:"i" %}
+                            <a href="{% url 'remove_from_shortlist' listing.jobId %}" data-jobid="{{ listing.jobId }}" class="btn btn-primary job shortlisted"><i class="far fa-heart"></i> Shortlisted</a>
+                        {% endif %}
+                    {% endfor %}
                     </div>
                 </div>
                 <br>

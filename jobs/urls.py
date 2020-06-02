@@ -6,6 +6,6 @@ urlpatterns = [
     path('search', views.search, name='search'),
     path('shortlist', views.shortlist, name='shortlist'),
     path('delete/<int:job_id>', views.delete, name='delete'),
-    path('remove/<int:job_id>', views.remove_from_shortlist, name='remove'),
+    path('remove/<int:job_id>', views.remove_from_shortlist, name='remove_from_shortlist'),
     path('add/<int:job_id>', views.add_to_shortlist, name='add_to_shortlist'),
 ]
