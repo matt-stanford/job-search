@@ -29,6 +29,21 @@ def search(request):
     else:
         return render(request, 'jobs/search.html', {})
 
+def detail(request, job_id):
+    import requests
+    import json
+    api_key = '842b7b02-1d3f-48fd-8e73-1b599b0bce57'
+    api_request = requests.get(f'https://{api_key}:@www.reed.co.uk/api/1.0/jobs/{job_id}')
+    listing = json.loads(api_request.content)
+
+    context = {
+        'listing': listing
+    }
+    
+    return render(request, 'jobs/detail.html', context)
+    
+
+
 
 def listings(request):
     return render(request, 'jobs/listings.html', {})

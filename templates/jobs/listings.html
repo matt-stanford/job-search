@@ -13,7 +13,7 @@
                 {% for listing in listings.results %}
                 <div class="card">
                     <div class="card-body">
-                        <h3 class="card-title"><a href="{{ listing.jobUrl }}">{{ listing.jobTitle }}</a></h3>
+                        <h3 class="card-title"><a href="{% url 'detail' listing.jobId %}">{{ listing.jobTitle }}</a></h3>
                         <p class="card-text"><i class="far fa-clock"></i> Posted {{ listing.date }} by {{ listing.employerName }}</p>
                         <div class="row">
                             <div class="col">
@@ -36,12 +36,18 @@
                         </div>
                         <br>
                     <p class="card-text">{{ listing.jobDescription }}</p>
-                    <a href="{% url 'add_to_shortlist' listing.jobId %}" data-jobid="{{ listing.jobId }}" class="btn btn-primary job"><i class="far fa-heart"></i> Shortlist</a>
-                    {% for job in jobs %}
-                        {% if job.jobId == listing.jobId|stringformat:"i" %}
-                            <a href="{% url 'remove_from_shortlist' listing.jobId %}" data-jobid="{{ listing.jobId }}" class="btn btn-primary job shortlisted"><i class="far fa-heart"></i> Shortlisted</a>
-                        {% endif %}
-                    {% endfor %}
+                    
+                    {% if jobs %}
+                        {% for job in jobs %}
+                            {% if job.jobId == listing.jobId|stringformat:"i" %}
+                                <a href="{% url 'remove_from_shortlist' listing.jobId %}" data-jobid="{{ listing.jobId }}" class="btn btn-primary job shortlisted"><i class="far fa-heart"></i> Shortlisted</a>
+                            {% else %}
+                                <a href="{% url 'add_to_shortlist' listing.jobId %}" data-jobid="{{ listing.jobId }}" class="btn btn-primary job"><i class="far fa-heart"></i> Shortlist</a>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <a href="{% url 'add_to_shortlist' listing.jobId %}" data-jobid="{{ listing.jobId }}" class="btn btn-primary job"><i class="far fa-heart"></i> Shortlist</a>
+                    {% endif %}
                     </div>
                 </div>
                 <br>
@@ -54,3 +60,5 @@
 <!-- update button to say shortlisted when clicked - fill heart and change button to white -->
 
 <!-- {% url 'add_to_shortlist' listing.jobId %} -->
+
+<!-- <a href="{{ listing.jobUrl }}"> -->

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% load humanize %}
+
+{% block title %}{{ listing.jobTitle }}{% endblock %}
+
+{% block content %}
+    <br>
+        <div class="card mt-3 blue-top">
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col">
+                        <h1>{{ listing.jobTitle }}</h1>
+                        <p>Posted {{ listing.datePosted }} by {{ listing.employerName }}</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="info-box">
+                            <div class="row">
+                                <div class="salary col">
+                                    {% if listing.currency == 'GBP' %}<i class="fas fa-pound-sign"></i>
+                                    {% elif listing.currency == 'EUR' %}<i class="fas fa-euro-sign"></i>
+                                    {% elif listing.currency == 'USD' %}<i class="fas fa-dollar-sign"></i>
+                                    {% endif %} {{ listing.salary }}
+                                </div>
+                                <div class="location col">
+                                    <i class="fas fa-map-marker-alt"></i> {{ listing.locationName }}
+                                </div>
+                            </div>
+            
+                            <div class="row">
+                                <div class="time col">
+                                    <i class="far fa-clock"></i> {{ listing.contractType }}, {% if listing.fullTime %}Full Time{% else %}Part Time{% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="job-description mt-3">
+                            {{ listing.jobDescription|safe }}
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-primary btn-block">Apply Now</button>
+                        <a href="{% url 'add_to_shortlist' listing.jobId %}" data-jobid="{{ listing.jobId }}" class="btn btn-outline-primary btn-block job"><i class="far fa-heart"></i> Shortlist</a>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+
+{% endblock %}

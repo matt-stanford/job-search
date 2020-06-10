@@ -128,11 +128,15 @@ h5 {
 
 .dropdown-menu {
     padding: 0 !important;
-    border-radius: 0px !important;;
+    border-radius: 0px !important;
+}
+
+.dropdown-item {
+    background-color: white !important;
 }
 
 .dropdown-item:hover {
-    background-color: #eaeaea;
+    background-color: #eaeaea !important;
 }
 
 .dropdown-divider {
@@ -173,3 +177,10 @@ h5 {
     font-size: 50px;
 }
 /*  :not(.btn-register, .dropdown-show) */
+
+.info-box {
+    border: 1px solid #cfddf3;
+    border-radius: 4px;
+    padding: 15px;
+    background-color: #f0f4fa;
+}
