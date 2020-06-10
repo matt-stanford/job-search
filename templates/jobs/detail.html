@@ -35,18 +35,55 @@
                                 <div class="time col">
                                     <i class="far fa-clock"></i> {{ listing.contractType }}, {% if listing.fullTime %}Full Time{% else %}Part Time{% endif %}
                                 </div>
+                                <div class="applications col">
+                                    {% if listing.applicationCount < 10 %}<i class="far fa-user"></i> Be one of the first ten applicants{% endif %}
+                                </div>
                             </div>
                         </div>
                         <div class="job-description mt-3">
                             {{ listing.jobDescription|safe }}
                         </div>
                     </div>
+
                     <div class="col-md-3">
                         <button class="btn btn-primary btn-block">Apply Now</button>
                         <a href="{% url 'add_to_shortlist' listing.jobId %}" data-jobid="{{ listing.jobId }}" class="btn btn-outline-primary btn-block job"><i class="far fa-heart"></i> Shortlist</a>
+                        
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-outline-primary btn-block" data-toggle="modal" data-target="#exampleModal">
+                            <i class="fas fa-share-alt"></i> Share Job
+                        </button>
+                        
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h2 class="modal-title" id="exampleModalLabel">{{ listing.jobTitle }}</h2>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="{% url 'share_job' %}" method="post">
+                                            {% csrf_token %}
+                                            <div class="form-group">
+                                                <label for="email-from">Email from</label>
+                                                <input type="email" id="email-from" name="email-from" class="form-control" value="{{ user.email }}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="email-to">Email to</label>
+                                                <input type="email" id="email-to" name="email-to" class="form-control" placeholder="example@gmail.com">
+                                            </div>
+                                            <input type="hidden" name="listing" value="{{ listing }}">
+                                            <button type="submit" class="btn btn-primary"><i class="fas fa-share-alt"></i> Share Job</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                
                 
             </div>
         </div>

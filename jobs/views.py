@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
 from django.http import HttpResponse
 from .models import Job
 
@@ -29,21 +30,37 @@ def search(request):
     else:
         return render(request, 'jobs/search.html', {})
 
+@login_required
 def detail(request, job_id):
     import requests
     import json
     api_key = '842b7b02-1d3f-48fd-8e73-1b599b0bce57'
     api_request = requests.get(f'https://{api_key}:@www.reed.co.uk/api/1.0/jobs/{job_id}')
     listing = json.loads(api_request.content)
+    user = request.user
 
     context = {
-        'listing': listing
+        'listing': listing,
+        'user': user
     }
-    
+
     return render(request, 'jobs/detail.html', context)
     
 
+@login_required
+def share_job(request):
+    if request.method == 'POST':
+        email_from = request.POST['email-from']
+        email_to = request.POST['email-to']
+        listing = request.POST['listing']
 
+        send_mail(
+            'You\'ve been sent a job from jobsearch.co.uk',
+            f'{ email_from } thought you might be interested in this job currently being advertised on jobsearch.co.uk: { listing }',
+            email_from,
+            [email_to,]
+        )
+    return HttpResponse(status=204)
 
 def listings(request):
     return render(request, 'jobs/listings.html', {})

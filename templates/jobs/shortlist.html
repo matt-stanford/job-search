@@ -13,7 +13,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
-                                <p class="card-text mb-1"><a href="{{ job.jobUrl }}"><strong>{{ job.jobTitle }}</strong></a></p>
+                                <p class="card-text mb-1"><a href="{% url 'detail' job.jobId %}"><strong>{{ job.jobTitle }}</strong></a></p>
                                 <p class="card-text mb-1">{{ job.locationName }} - {{ job.employerName }}</p>
                                 <p class="card-text">Saved: {{ job.saveDate | timesince }}</p>
                             </div>

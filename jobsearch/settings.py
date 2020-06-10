@@ -142,3 +142,10 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 SITE_ID = 1
+
+# Email config
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'btrealestate79@gmail.com'
+EMAIL_HOST_PASSWORD = 'xhlfnfceanicgkmo'
+EMAIL_USE_TLS = True
