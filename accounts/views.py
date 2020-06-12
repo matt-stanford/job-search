@@ -1,6 +1,9 @@
+import os
 from django.shortcuts import render, redirect
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse, Http404
 from .forms import UserRegistrationForm, ResumeForm
 
 def register(request):
@@ -33,6 +36,17 @@ def resume_upload(request):
     else:
         form = ResumeForm()
     return render(request, 'accounts/uploadcv.html', {'form': form})
+
+
+@login_required
+def resume_download(request, filepath):
+    file_path = os.path.join(settings.MEDIA_ROOT, 'documents', filepath )
+    if os.path.exists(file_path):
+        with open(file_path, 'rb') as fh:
+            response = HttpResponse(fh.read(), content_type='application/pdf')
+            response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
+            return response
+    raise Http404
     
 
 

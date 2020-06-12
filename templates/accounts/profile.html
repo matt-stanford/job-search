@@ -36,7 +36,8 @@
                                                 <i class="far fa-file"></i>
                                                 <span>{{ user.resume.filename }}</span>
                                             </span>
-                                            <span>Added {{ user.resume.date_uploaded|date:"d/m/Y" }}</span>
+                                            <p>Added {{ user.resume.date_uploaded|date:"d/m/Y" }}</p>
+                                            <p><a href=" {% url 'downloadcv' user.resume.filepath %}" target="_blank"><i class="fas fa-file-download"></i> Download</a></p>
                                         </div>
                                     </div>
                                 </div>

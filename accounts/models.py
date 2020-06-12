@@ -8,6 +8,10 @@ class Resume(models.Model):
     date_uploaded = models.DateTimeField(auto_now_add=True)
 
     @property
+    def filepath(self):
+        return os.path.basename(self.resume.name)
+
+    @property
     def filename(self):
         return f'{os.path.basename(self.resume.name)[:11]}...'
 
