@@ -73,10 +73,14 @@
                                             </div>
                                             <div class="form-group">
                                                 <label for="email-to">Email to</label>
-                                                <input type="email" id="email-to" name="email-to" class="form-control" placeholder="example@gmail.com">
+                                                <input type="email" id="email-to" name="email-to" class="form-control" placeholder="example@gmail.com" required>
                                             </div>
-                                            <input type="hidden" name="listing" value="{{ listing }}">
-                                            <button type="submit" class="btn btn-primary"><i class="fas fa-share-alt"></i> Share Job</button>
+                                            <input type="hidden" name="job-title" value="{{ listing.jobTitle }}">
+                                            <input type="hidden" name="location" value="{{ listing.locationName }}">
+                                            <input type="hidden" name="salary" value="{{ listing.salary }}">
+                                            <input type="hidden" name="job-url" value="{{ listing.jobUrl }}">
+                                            <input type="hidden" name="job-description" value="{{ listing.jobDescription }}">
+                                            <button type="submit" class="btn btn-primary btn-block mb-3"><i class="fas fa-share-alt"></i> Share Job</button>
                                         </form>
                                     </div>
                                 </div>

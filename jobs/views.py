@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 from django.http import HttpResponse
 from .models import Job
 
@@ -50,15 +53,33 @@ def detail(request, job_id):
 @login_required
 def share_job(request):
     if request.method == 'POST':
+        subject = 'You\'ve been sent a job from jobsearch.co.uk'
         email_from = request.POST['email-from']
         email_to = request.POST['email-to']
-        listing = request.POST['listing']
+        job_title = request.POST['job-title']
+        location = request.POST['location']
+        salary = request.POST['salary']
+        job_url = request.POST['job-url']
+        job_description = request.POST['job-description']
+
+        context = {
+            'emailFrom': email_from,
+            'jobTitle': job_title,
+            'location': location,
+            'salary': salary,
+            'jobUrl': job_url,
+            'jobDescription': job_description
+        }
+
+        html_message = render_to_string('emails/share_job_email.html', context)
+        plain_message = strip_tags(html_message)
 
         send_mail(
-            'You\'ve been sent a job from jobsearch.co.uk',
-            f'{ email_from } thought you might be interested in this job currently being advertised on jobsearch.co.uk: { listing }',
+            subject,
+            plain_message,
             email_from,
-            [email_to,]
+            [email_to,],
+            html_message=html_message
         )
     return HttpResponse(status=204)
 
