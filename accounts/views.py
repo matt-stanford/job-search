@@ -2,6 +2,8 @@ import os
 from django.shortcuts import render, redirect
 from django.conf import settings
 from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, Http404
 from .forms import UserRegistrationForm, ResumeForm
@@ -16,6 +18,28 @@ def register(request):
     else:
         form = UserRegistrationForm()
     return render(request, 'accounts/signup.html', {'form': form})
+
+
+def loginView(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request.POST)
+        if form.is_valid():
+            username = request.POST['username']
+            password = request.POST['password']
+            user = authenticate(username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+            else:
+                return redirect('register')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'accounts/login.html', {'form': form})
+
+
+def logoutView(request):
+    logout(request)
+    return redirect('login')
 
 
 @login_required

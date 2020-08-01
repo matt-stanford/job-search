@@ -116,7 +116,7 @@ h5 {
     line-height: 60px;
 }
 
-.nav-item:hover {
+.nav-item:hover:not(.nav-item-register) {
     transition: background-color .2s ease-in;
     background: #1172da;
 }
