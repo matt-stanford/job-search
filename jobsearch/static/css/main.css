@@ -29,6 +29,10 @@ h5 {
     font-weight: 700 !important;
 }
 
+a:hover {
+    text-decoration: none !important;
+}
+
 .privacy-notice {
     padding-top: 25px;
     padding-bottom: 15px;
@@ -199,8 +203,34 @@ h5 {
     width: 136px;
     height: 136px;
     border-radius: 50%;
-    font-size: 80px;
+    font-size: 70px;
     color: #fff;
     top: 20%;
     background-color: #222e39;
+}
+
+.btn-shortlisted {
+    color: #fff;
+    background-color: #007bff;
+    border: 1px solid #007bff;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    display: none;
+}
+
+.btn-shortlisted a {
+    text-decoration: none;
+}
+
+.btn-shortlisted:hover {
+    color: #fff;
+    background-color: #0069d9;
+    border-color: #0062cc;
 }

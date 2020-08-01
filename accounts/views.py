@@ -22,7 +22,7 @@ def register(request):
 
 def loginView(request):
     if request.method == 'POST':
-        form = AuthenticationForm(request.POST)
+        form = AuthenticationForm(data=request.POST)
         if form.is_valid():
             username = request.POST['username']
             password = request.POST['password']
@@ -30,6 +30,8 @@ def loginView(request):
 
             if user is not None:
                 login(request, user)
+                messages.success(request, f'Welcome {request.user.first_name}')
+                return redirect('search')
             else:
                 return redirect('register')
     else:
@@ -39,15 +41,15 @@ def loginView(request):
 
 def logoutView(request):
     logout(request)
-    return redirect('login')
+    return redirect('index')
 
 
-@login_required
+@login_required(redirect_field_name='next', login_url='login')
 def profile(request):
     return render(request, 'accounts/profile.html', {})
 
 
-@login_required
+@login_required(redirect_field_name='next', login_url='login')
 def resume_upload(request):
     if request.method == 'POST':
         form = ResumeForm(request.POST, request.FILES)
@@ -62,7 +64,7 @@ def resume_upload(request):
     return render(request, 'accounts/uploadcv.html', {'form': form})
 
 
-@login_required
+@login_required(redirect_field_name='next', login_url='login')
 def resume_download(request, filepath):
     file_path = os.path.join(settings.MEDIA_ROOT, 'documents', filepath )
     if os.path.exists(file_path):

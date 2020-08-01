@@ -9,7 +9,7 @@ from django.http import HttpResponse
 from .models import Job
 
 
-@login_required
+@login_required(redirect_field_name='next', login_url='login')
 def search(request):
     import requests
     import json
@@ -33,7 +33,7 @@ def search(request):
     else:
         return render(request, 'jobs/search.html', {})
 
-@login_required
+@login_required(redirect_field_name='next', login_url='login')
 def detail(request, job_id):
     import requests
     import json
@@ -50,7 +50,7 @@ def detail(request, job_id):
     return render(request, 'jobs/detail.html', context)
     
 
-@login_required
+@login_required(redirect_field_name='next', login_url='login')
 def share_job(request):
     if request.method == 'POST':
         subject = 'You\'ve been sent a job from jobsearch.co.uk'
@@ -86,27 +86,27 @@ def share_job(request):
 def listings(request):
     return render(request, 'jobs/listings.html', {})
 
-@login_required
+@login_required(redirect_field_name='next', login_url='login')
 def shortlist(request):
     jobs = Job.objects.filter(user=request.user).order_by('-saveDate')
     return render(request, 'jobs/shortlist.html', {'jobs': jobs})
 
 
-@login_required
+@login_required(redirect_field_name='next', login_url='login')
 def delete(request, job_id):
     job = Job.objects.get(pk=job_id)
     job.delete()
     return redirect('shortlist')
 
 
-@login_required
+@login_required(redirect_field_name='next', login_url='login')
 def remove_from_shortlist(request, job_id):
     job = Job.objects.get(jobId=job_id)
     job.delete()
     return HttpResponse(status=204)
 
 
-@login_required
+@login_required(redirect_field_name='next', login_url='login')
 def add_to_shortlist(request, job_id):
     import requests
     import json

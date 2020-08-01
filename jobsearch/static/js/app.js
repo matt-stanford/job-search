@@ -1,32 +1,13 @@
-let jobs = Array.from(document.getElementsByClassName('job'))
+const jobBtns = Array.from(document.getElementsByClassName('btn-shortlist'))
+const shortlistBtns = Array.from(document.getElementsByClassName('btn-shortlisted'))
+console.log(jobBtns)
 
-
-// jobs.forEach(job => {
-//     job.addEventListener('click', function() {
-//         let jobid = this.dataset.jobid
-//         job.classList.toggle('shortlisted')
-//         if (job.classList.contains('shortlisted')) {
-//             // job.classList.remove('shortlisted')
-//             job.innerHTML = '<i class="far fa-heart"></i> Shortlisted'
-//             console.log(jobid)
-//             // job.setAttribute('href', "add/" + jobid)
-//         } else {
-//             // job.classList.add('shortlisted')
-//             job.innerHTML = '<i class="far fa-heart"></i> Shortlist'
-//             console.log(jobid)
-//             // job.setAttribute('href', "remove/" + jobid)
-//         }
-//     });
-// });
-
-
-// function updateBtnClass(job) {
-    // job.classList.toggle('shortlisted');
-    // console.log(job);
-    // if (job.classList.contains('shortlisted')) {
-    //     job.innerHTML = 'Shortlisted'
-    // } else {
-    //     job.innerHTML = 'Shortlist'
-    // }
-// }
-
+jobBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+        let jobId = this.dataset.jobid
+        let shortlistBtn = document.getElementById(jobId)
+        console.log(shortlistBtn)
+        shortlistBtn.style.display = 'inline-block'
+        btn.style.display = 'none'
+    });
+});

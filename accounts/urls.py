@@ -10,7 +10,7 @@ urlpatterns = [
     path('uploadcv/', views.resume_upload, name='uploadcv'),
     path('downloadcv/<filepath>', views.resume_download, name='downloadcv'),
     path('signin/', views.loginView, name='login'),
-    path('logout/', views.logoutView, name='logout'),
+    path('signout/', views.logoutView, name='logout'),
 ]
 
 if settings.DEBUG:

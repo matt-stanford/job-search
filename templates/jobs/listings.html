@@ -2,7 +2,7 @@
 
 {% load humanize %}
 
-{% block title %}Jobs{% endblock %}
+{% block title %}{{ keywords | title }} Jobs in {{ locationName | title }}{% endblock %}
 
 {% block content %}
 
@@ -37,17 +37,16 @@
                         <br>
                     <p class="card-text">{{ listing.jobDescription }}</p>
                     
-                    {% if jobs %}
-                        {% for job in jobs %}
-                            {% if job.jobId == listing.jobId|stringformat:"i" %}
-                                <a href="{% url 'remove_from_shortlist' listing.jobId %}" data-jobid="{{ listing.jobId }}" class="btn btn-primary job shortlisted"><i class="far fa-heart"></i> Shortlisted</a>
-                            {% else %}
-                                <a href="{% url 'add_to_shortlist' listing.jobId %}" data-jobid="{{ listing.jobId }}" class="btn btn-primary job"><i class="far fa-heart"></i> Shortlist</a>
-                            {% endif %}
-                        {% endfor %}
-                    {% else %}
-                        <a href="{% url 'add_to_shortlist' listing.jobId %}" data-jobid="{{ listing.jobId }}" class="btn btn-primary job"><i class="far fa-heart"></i> Shortlist</a>
-                    {% endif %}
+                        <!-- {% if jobs %}
+                            {% for job in jobs %}
+                                {% if listing.jobId|stringformat:"i" == job.jobId %}
+                                <a href="{% url 'shortlist' %}" class="btn btn-primary btn-shortlisted"><i class="fas fa-heart"></i> Shortlisted</a>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %} -->
+
+                        <a href="{% url 'add_to_shortlist' listing.jobId %}" data-jobid="{{ listing.jobId }}" class="btn btn-primary btn-shortlist"><i class="far fa-heart"></i> Shortlist</a>
+                        <a href="{% url 'shortlist' %}" class="btn-shortlisted" id="{{ listing.jobId }}" title="Job already shortlisted. Go to shortlist."><i class="fas fa-heart"></i> Shortlisted</a>
                     </div>
                 </div>
                 <br>
@@ -56,9 +55,3 @@
     </div>
     
 {% endblock %}
-
-<!-- update button to say shortlisted when clicked - fill heart and change button to white -->
-
-<!-- {% url 'add_to_shortlist' listing.jobId %} -->
-
-<!-- <a href="{{ listing.jobUrl }}"> -->
