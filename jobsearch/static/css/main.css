@@ -184,3 +184,23 @@ h5 {
     padding: 15px;
     background-color: #f0f4fa;
 }
+
+.profile-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: .5em;
+}
+
+.initials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 136px;
+    height: 136px;
+    border-radius: 50%;
+    font-size: 80px;
+    color: #fff;
+    top: 20%;
+    background-color: #222e39;
+}
