@@ -19,7 +19,7 @@
     <h1>{{ greeting }}, {{ request.user.first_name }}</h1>
     <br>
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-9">
             <div class="jumbotron">
                 <form method="POST" action="{% url 'search' %}">
                     {% csrf_token %}
@@ -35,7 +35,7 @@
                 </form>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="card blue-top">
                 <div class="card-body text-center">
                     <div class="profile-avatar">

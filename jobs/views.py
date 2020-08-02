@@ -25,7 +25,7 @@ def search(request):
         greeting += 'evening'
 
     if request.method == 'POST':
-        jobs = Job.objects.filter(user=request.user)
+        jobs = Job.objects.filter(user=request.user).values_list('jobId', flat=True)
         keywords = request.POST['keywords']
         locationName = request.POST['locationName']
         api_request = requests.get(f'https://{api_key}:@www.reed.co.uk/api/1.0/search?keywords={keywords}&locationName={locationName}&distanceFromLocation=10')
