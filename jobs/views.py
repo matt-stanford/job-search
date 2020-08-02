@@ -53,10 +53,12 @@ def detail(request, job_id):
     api_request = requests.get(f'https://{api_key}:@www.reed.co.uk/api/1.0/jobs/{job_id}')
     listing = json.loads(api_request.content)
     user = request.user
+    jobs = Job.objects.filter(user=user).values_list('jobId', flat=True)
 
     context = {
         'listing': listing,
-        'user': user
+        'user': user,
+        'jobs': jobs
     }
 
     return render(request, 'jobs/detail.html', context)

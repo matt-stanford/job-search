@@ -47,10 +47,16 @@
 
                     <div class="col-md-3">
                         <button class="btn btn-primary btn-block">Apply Now</button>
-                        <a href="{% url 'add_to_shortlist' listing.jobId %}" data-jobid="{{ listing.jobId }}" class="btn btn-outline-primary btn-block job"><i class="far fa-heart"></i> Shortlist</a>
+
+                        {% if listing.jobId|stringformat:"i" in jobs %}
+                            <a href="{% url 'shortlist' %}" class="btn btn-primary btn-block"><i class="fas fa-heart"></i> Shortlisted</a>
+                        {% else %}
+                            <a href="{% url 'add_to_shortlist' listing.jobId %}" data-jobid="{{ listing.jobId }}" class="btn btn-primary btn-shortlist btn-block"><i class="far fa-heart"></i> Shortlist</a>
+                            <a href="{% url 'shortlist' %}" class="btn-shortlisted mt-2 w-100" id="{{ listing.jobId }}" title="Job already shortlisted. Go to shortlist."><i class="fas fa-heart"></i> Shortlisted</a>
+                        {% endif %}
                         
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-outline-primary btn-block" data-toggle="modal" data-target="#exampleModal">
+                        <button type="button" class="btn btn-outline-primary btn-block mt-2" data-toggle="modal" data-target="#exampleModal">
                             <i class="fas fa-share-alt"></i> Share Job
                         </button>
                         
