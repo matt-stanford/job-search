@@ -114,13 +114,6 @@ def delete(request, job_id):
 
 
 @login_required(redirect_field_name='next', login_url='login')
-def remove_from_shortlist(request, job_id):
-    job = Job.objects.get(jobId=job_id)
-    job.delete()
-    return HttpResponse(status=204)
-
-
-@login_required(redirect_field_name='next', login_url='login')
 def add_to_shortlist(request, job_id):
     import requests
     import json

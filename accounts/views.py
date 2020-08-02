@@ -30,7 +30,6 @@ def loginView(request):
 
             if user is not None:
                 login(request, user)
-                messages.success(request, f'Welcome {request.user.first_name}')
                 return redirect('search')
             else:
                 return redirect('register')
