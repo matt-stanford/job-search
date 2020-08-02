@@ -37,16 +37,19 @@
                         <br>
                     <p class="card-text">{{ listing.jobDescription }}</p>
                     
-                        <!-- {% if jobs %}
+                        {% if jobs %}
                             {% for job in jobs %}
                                 {% if listing.jobId|stringformat:"i" == job.jobId %}
-                                <a href="{% url 'shortlist' %}" class="btn btn-primary btn-shortlisted"><i class="fas fa-heart"></i> Shortlisted</a>
+                                    <a href="{% url 'shortlist' %}" class="btn btn-primary"><i class="fas fa-heart"></i> Shortlisted</a>
+                                {% else %}
+                                    1
                                 {% endif %}
                             {% endfor %}
-                        {% endif %} -->
-
+                        {% endif %}
                         <a href="{% url 'add_to_shortlist' listing.jobId %}" data-jobid="{{ listing.jobId }}" class="btn btn-primary btn-shortlist"><i class="far fa-heart"></i> Shortlist</a>
                         <a href="{% url 'shortlist' %}" class="btn-shortlisted" id="{{ listing.jobId }}" title="Job already shortlisted. Go to shortlist."><i class="fas fa-heart"></i> Shortlisted</a>
+
+                        
                     </div>
                 </div>
                 <br>

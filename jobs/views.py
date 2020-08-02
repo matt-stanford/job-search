@@ -7,13 +7,22 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.http import HttpResponse
 from .models import Job
-
+import datetime
 
 @login_required(redirect_field_name='next', login_url='login')
 def search(request):
     import requests
     import json
     api_key = '842b7b02-1d3f-48fd-8e73-1b599b0bce57'
+
+    greeting = 'Good '
+    hour = int(datetime.datetime.now().hour)
+    if hour < 12:
+        greeting += 'morning'
+    elif hour < 18:
+        greeting += 'afternoon'
+    else:
+        greeting += 'evening'
 
     if request.method == 'POST':
         jobs = Job.objects.filter(user=request.user)
@@ -31,7 +40,10 @@ def search(request):
         
         return render(request, 'jobs/listings.html', context)
     else:
-        return render(request, 'jobs/search.html', {})
+        context = {
+            'greeting': greeting
+        }
+        return render(request, 'jobs/search.html', context)
 
 @login_required(redirect_field_name='next', login_url='login')
 def detail(request, job_id):
