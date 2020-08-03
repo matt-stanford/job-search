@@ -39,7 +39,7 @@
                                                 <span>{{ user.resume.filename }}</span>
                                             </span>
                                             <p>Added {{ user.resume.date_uploaded|date:"d/m/Y" }}</p>
-                                            <p><a href=" {% url 'downloadcv' user.resume.filepath %}" target="_blank"><i class="fas fa-file-download"></i> Download</a></p>
+                                            <p><a href="{% url 'downloadcv' user.resume.filepath %}" target="_blank"><i class="fas fa-file-download"></i> Download</a></p>
                                         </div>
                                     </div>
                                 </div>

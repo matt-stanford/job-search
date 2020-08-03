@@ -26,7 +26,7 @@
                                 <span>{{ user.resume.date_uploaded|date:"d/m/Y" }}</span>
                             </div>
                             <div class="col-md-4">
-                                <a href="#">Download</a>
+                                <a href="{% url 'downloadcv' user.resume.filepath %}" target="_blank">Download</a>
                             </div>
                         </div>
                     </div>
