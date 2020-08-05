@@ -53,8 +53,6 @@ def resume_upload(request):
     if request.method == 'POST':
         form = ResumeForm(request.POST, request.FILES)
         if form.is_valid():
-            # user = request.user
-            # form.instance.user = user
             form.save()
             messages.success(request, 'Your resume has been uploaded successfully')
             return redirect('uploadcv')
