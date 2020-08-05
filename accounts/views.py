@@ -58,7 +58,7 @@ def resume_upload(request):
                 form.save()
                 messages.success(request, 'Your resume has been uploaded successfully')
                 return redirect('uploadcv')
-        except Exception as e:
+        except TypeError as e:
             messages.error(request, e)
     else:
         form = ResumeForm()
