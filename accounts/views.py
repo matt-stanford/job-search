@@ -52,14 +52,11 @@ def profile(request):
 def resume_upload(request):
     if request.method == 'POST':
         form = ResumeForm(request.POST, request.FILES)
-        user = request.user
-        try:
-            if form.is_valid():
-                form.save()
-                messages.success(request, 'Your resume has been uploaded successfully')
-                return redirect('uploadcv')
-        except TypeError as e:
-            messages.error(request, e)
+        if form.is_valid():
+            user = request.user
+            form.save()
+            messages.success(request, 'Your resume has been uploaded successfully')
+            return redirect('uploadcv')
     else:
         form = ResumeForm()
     return render(request, 'accounts/uploadcv.html', {'form': form})
