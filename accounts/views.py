@@ -7,6 +7,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, Http404
 from .forms import UserRegistrationForm, ResumeForm
+from .models import Resume
 
 def register(request):
     if request.method == 'POST':
@@ -50,15 +51,14 @@ def profile(request):
 
 @login_required(redirect_field_name='next', login_url='login')
 def resume_upload(request):
-    if request.method == 'POST':
-        form = ResumeForm(request.POST, request.FILES)
-        if form.is_valid():
-            user = request.user
-            form.save()
-            messages.success(request, 'Your resume has been uploaded successfully')
-            return redirect('uploadcv')
+    form = ResumeForm(request.POST or None, request.FILES or None)
+    if form.is_valid():
+        form.instance.user = request.user
+        form.save()
+        messages.success(request, 'Your resume has been uploaded successfully')
+        return redirect('profile')
     else:
-        form = ResumeForm()
+        print(form.errors)
     return render(request, 'accounts/uploadcv.html', {'form': form})
 
 
@@ -71,7 +71,20 @@ def resume_download(request, filepath):
             response['Content-Disposition'] = 'inline; filename=' + os.path.basename(file_path)
             return response
     raise Http404
-    
+
+
+@login_required(redirect_field_name='next', login_url='login')
+def resume_update(request):
+    obj = Resume.objects.get(user=request.user)
+    form = ResumeForm(request.POST or None, request.FILES or None, instance=obj)
+    if form.is_valid():
+        form.instance.user = request.user
+        obj.resume = request.FILES['resume']
+        obj.save()
+        form.save()
+        messages.success(request, 'Your resume has been updated successfully')
+        return redirect('profile')
+    return render(request, 'accounts/uploadcv.html', {'form': form})
 
 
 

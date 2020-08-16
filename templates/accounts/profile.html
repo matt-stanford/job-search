@@ -4,6 +4,16 @@
 
 {% block content %}
     <div class="large-container mt-4">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endfor %}
+        {% endif %}
         <div class="row">
             <div class="col-sm-4">
                 <div class="card">
@@ -67,7 +77,7 @@
                                                             We've noticed that you added a CV on {{ user.resume.date_uploaded|date:"d/m/Y" }}. Updating your CV will overwrite and replace your current saved CV - {{ user.resume.filename }} Do you want to continue?
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <a href="{% url 'uploadcv' %}" class="btn btn-primary">Continue</a>
+                                                            <a href="{% url 'updatecv' %}" class="btn btn-primary">Continue</a>
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                                                         </div>
                                                     </div>

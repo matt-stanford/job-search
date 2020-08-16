@@ -6,6 +6,7 @@ class Resume(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     resume = models.FileField(upload_to='documents/', blank=True, null=True)
     date_uploaded = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
 
     @property
     def filepath(self):

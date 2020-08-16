@@ -238,3 +238,23 @@ a:hover {
     background-color: #0069d9;
     border-color: #0062cc;
 }
+
+#resume-clear_id,
+#div_id_resume label {
+    display: none;
+}
+
+input #file-upload-button {
+    color: #fff;
+    background-color: #007bff;
+    border: 1px solid #007bff;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
